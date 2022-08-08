@@ -30,4 +30,9 @@ class Client extends Model
       'email_address',
     ];
 
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
+
 }
