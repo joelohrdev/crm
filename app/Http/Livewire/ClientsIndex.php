@@ -55,6 +55,7 @@ class ClientsIndex extends Component
             ->title('Client Successfully Saved!')
             ->success()
             ->seconds(5)
+            ->iconColor('success')
             ->send();
     }
 
@@ -66,7 +67,7 @@ class ClientsIndex extends Component
     public function render()
     {
         return view('livewire.clients-index', [
-            'clients' => Client::paginate(10)
+            'clients' => Client::where('status', 'active')->orderBy('name', 'asc')->paginate(10)
         ]);
     }
 }
