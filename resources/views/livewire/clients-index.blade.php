@@ -12,7 +12,7 @@
                         <thead class="bg-gray-50">
                         <tr>
                             <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
-                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Title</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Phone</th>
                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
                             <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -26,9 +26,15 @@
                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ $client->name }}</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $client->phone_number }}</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $client->email_address }}</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $client->status }}</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                @if($client->status === 'active')
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800"> Active </span>
+                                @else
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800"> Closed </span>
+                                @endif
+                            </td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                <a href="#" class="text-tkd-blue-600 hover:text-tkd-blue-900">View<span class="sr-only">, {{ $client->name }}</span></a>
+                                <a href="{{ route('client.show', $client->slug) }}" class="text-tkd-blue-600 hover:text-tkd-blue-900">View<span class="sr-only">, {{ $client->name }}</span></a>
                             </td>
                         </tr>
                         @empty
@@ -66,25 +72,41 @@
         <x-jet-dialog-modal wire:model.defer="showModal">
             <x-slot name="title">Create new client</x-slot>
             <x-slot name="content">
-                <div class="col-span-6 sm:col-span-4">
-                    <x-jet-label for="name" value="{{ __('Company Name') }}" />
-                    <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="name" autocomplete="name" />
-                    <x-jet-input-error for="name" class="mt-2" />
+                <div class="mb-5">
+                    <input wire:model.defer="name" type="text" class="w-full text-sm bg-gray-100 border-none rounded-lg placeholder-gray-900 px-4 py-2" placeholder="Company Name" required>
                 </div>
-                <div class="col-span-6 sm:col-span-4">
-                    <x-jet-label for="slug" value="{{ __('Slug') }}" />
-                    <x-jet-input id="slug" type="text" class="mt-1 block w-full" wire:model.defer="slug" autocomplete="slug" />
-                    <x-jet-input-error for="slug" class="mt-2" />
+                <div class="mb-5">
+                    <select wire:model.defer="status" name="status" id="status" class="w-full bg-gray-100 text-sm rounded-lg border-none px-4 py-2">
+                        <option value="active">Active</option>
+                        <option value="closed">Closed</option>
+                    </select>
                 </div>
-                <div class="col-span-6 sm:col-span-4">
-                    <x-jet-label for="status" value="{{ __('Status') }}" />
-                    <x-jet-input id="status" type="text" class="mt-1 block w-full" wire:model.defer="status" autocomplete="status" />
-                    <x-jet-input-error for="status" class="mt-2" />
+                <div class="mb-5">
+                    <input wire:model.defer="address" type="text" class="w-full text-sm bg-gray-100 border-none rounded-lg placeholder-gray-900 px-4 py-2" placeholder="Address" required>
+                </div>
+                <div class="mb-5">
+                    <input wire:model.defer="city" type="text" class="w-full text-sm bg-gray-100 border-none rounded-lg placeholder-gray-900 px-4 py-2" placeholder="City" required>
+                </div>
+                <div class="mb-5">
+                    <input wire:model.defer="state" type="text" class="w-full text-sm bg-gray-100 border-none rounded-lg placeholder-gray-900 px-4 py-2" placeholder="State" required>
+                </div>
+                <div class="mb-5">
+                    <input wire:model.defer="postal_code" type="text" class="w-full text-sm bg-gray-100 border-none rounded-lg placeholder-gray-900 px-4 py-2" placeholder="Zip Code" required>
+                </div>
+                <div class="mb-5">
+                    <input wire:model.defer="phone_number" type="text" class="w-full text-sm bg-gray-100 border-none rounded-lg placeholder-gray-900 px-4 py-2" placeholder="Phone Number" required>
+                </div>
+                <div class="mb-5">
+                    <input wire:model.defer="email_address" type="text" class="w-full text-sm bg-gray-100 border-none rounded-lg placeholder-gray-900 px-4 py-2" placeholder="Email Address" required>
                 </div>
             </x-slot>
             <x-slot name="footer">
-                <x-jet-secondary-button wire:click="showModal = false">Cancel</x-jet-secondary-button>
-                <x-jet-button type="submit">Save</x-jet-button>
+                <button type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition" wire:click="$set('showModal', false)">
+                    Cancel
+                </button>
+                <button type="submit" class="ml-5 inline-flex items-center px-4 py-2 bg-tkd-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-tkd-blue-700 active:bg-tkd-blue-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
+                    Save
+                </button>
             </x-slot>
         </x-jet-dialog-modal>
     </form>

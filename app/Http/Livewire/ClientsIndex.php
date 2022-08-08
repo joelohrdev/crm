@@ -10,14 +10,25 @@ class ClientsIndex extends Component
 {
     public $name;
     public $slug;
-    public $status;
+    public $status = 'active';
+    public $address;
+    public $city;
+    public $state;
+    public $postal_code;
+    public $phone_number;
+    public $email_address;
 
     public $showModal = false;
 
     protected $rules = [
         'name'   => 'required',
-        'slug'   => 'required',
         'status' => 'required',
+        'address' => 'nullable',
+        'city' => 'nullable',
+        'state' => 'nullable',
+        'postal_code' => 'nullable',
+        'phone_number' => 'nullable',
+        'email_address' => 'nullable',
     ];
 
     public function createClient()
@@ -28,6 +39,12 @@ class ClientsIndex extends Component
             'name' => $this->name,
             'slug' => $this->slug,
             'status' => $this->status,
+            'address' => $this->address,
+            'city' => $this->city,
+            'state' => $this->state,
+            'postal_code' => $this->postal_code,
+            'phone_number' => $this->phone_number,
+            'email_address' => $this->email_address,
         ]);
 
         $this->reset();
@@ -49,7 +66,7 @@ class ClientsIndex extends Component
     public function render()
     {
         return view('livewire.clients-index', [
-            'clients' => Client::paginate(20)
+            'clients' => Client::paginate(10)
         ]);
     }
 }

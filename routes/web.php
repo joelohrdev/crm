@@ -28,4 +28,7 @@ Route::middleware([
     Route::get('/clients', function () {
         return view('client.index');
     })->name('client.index');
+    Route::get('/clients/{slug}', function () {
+        return view('client.show');
+    })->name('client.show');
 });

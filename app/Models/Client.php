@@ -29,4 +29,5 @@ class Client extends Model
       'phone_number',
       'email_address',
     ];
+
 }
