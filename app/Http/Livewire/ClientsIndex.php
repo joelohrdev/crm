@@ -21,7 +21,7 @@ class ClientsIndex extends Component
     public $showModal = false;
 
     protected $rules = [
-        'name'   => 'required',
+        'name'   => 'required|unique:clients',
         'status' => 'required',
         'address' => 'nullable',
         'city' => 'nullable',
