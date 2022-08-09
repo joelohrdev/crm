@@ -39,15 +39,11 @@ class ContactController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
     public function show(Contact $contact)
     {
-        //
+        return view('contact.show', [
+            'contact' => $contact
+        ]);
     }
 
     /**

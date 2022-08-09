@@ -9,6 +9,7 @@ use Livewire\Component;
 class ClientDelete extends Component
 {
     public $client;
+
     public $showDeleteModal = false;
 
     public function mount(Client $client)
@@ -33,7 +34,6 @@ class ClientDelete extends Component
             ->send();
 
         return redirect()->route('client.index');
-
     }
 
     public function render()

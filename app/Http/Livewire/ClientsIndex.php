@@ -9,19 +9,27 @@ use Livewire\Component;
 class ClientsIndex extends Component
 {
     public $name;
+
     public $slug;
+
     public $status = 'active';
+
     public $address;
+
     public $city;
+
     public $state;
+
     public $postal_code;
+
     public $phone_number;
+
     public $email_address;
 
     public $showModal = false;
 
     protected $rules = [
-        'name'   => 'required|unique:clients',
+        'name' => 'required|unique:clients',
         'status' => 'required',
         'address' => 'nullable',
         'city' => 'nullable',
@@ -67,7 +75,7 @@ class ClientsIndex extends Component
     public function render()
     {
         return view('livewire.clients-index', [
-            'clients' => Client::where('status', 'active')->orderBy('name', 'asc')->paginate(10)
+            'clients' => Client::where('status', 'active')->orderBy('name', 'asc')->paginate(10),
         ]);
     }
 }

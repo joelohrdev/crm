@@ -22,9 +22,8 @@ Route::get('/', function () {
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
+    'verified',
 ])->group(function () {
-
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
@@ -33,13 +32,13 @@ Route::middleware([
         return view('client.index');
     })->name('client.index');
     Route::get('/clients/{client:slug}', [
-        ClientController::class, 'show'
+        ClientController::class, 'show',
     ])->name('client.show');
 
     Route::Get('/contacts', function () {
         return view('contact.index');
     })->name('contact.index');
     Route::get('/contacts/{contact:slug}', [
-        ContactController::class, 'show'
-    ])->name('client.show');
+        ContactController::class, 'show',
+    ])->name('contact.show');
 });

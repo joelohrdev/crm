@@ -23,7 +23,7 @@ class ClientFactory extends Factory
             'state' => $this->faker->state,
             'postal_code' => $this->faker->postcode,
             'phone_number' => $this->faker->phoneNumber,
-            'email_address' => $this->faker->email
+            'email_address' => $this->faker->email,
         ];
     }
 }

@@ -9,6 +9,7 @@ use Livewire\Component;
 class ClientShow extends Component
 {
     public $client;
+
     public $showModal = false;
 
     public function mount(Client $client)

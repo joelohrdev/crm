@@ -5,6 +5,11 @@
         {{ $client->phone_number }}<br>
         {{ $client->email_address }}<br/>
         <button wire:click="showModal" type="button" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-tkd-blue-700 bg-tkd-blue-100 hover:bg-tkd-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tkd-blue-500">Edit</button>
+        <br>
+        <br>
+        @foreach($client->contacts as $contact)
+            {{ $contact->name }}, {{ $contact->position }}
+        @endforeach
     </div>
 
     <form wire:submit.prevent="updateClient" action="#" method="post">

@@ -11,27 +11,24 @@ class Contact extends Model
     use HasFactory;
 
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'name',
         'slug',
         'client_id',
         'position',
         'phone_number',
         'extension',
-        'email_address'
+        'email_address',
     ];
 
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom(['first_name', 'last_name'])
             ->saveSlugsTo('slug');
     }
 
-
     public function client()
     {
         return $this->belongsTo(Client::class);
     }
-
 }

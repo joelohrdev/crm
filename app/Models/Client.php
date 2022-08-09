@@ -19,20 +19,19 @@ class Client extends Model
     }
 
     protected $fillable = [
-      'name',
-      'slug',
-      'status',
-      'address',
-      'city',
-      'state',
-      'postal_code',
-      'phone_number',
-      'email_address',
+        'name',
+        'slug',
+        'status',
+        'address',
+        'city',
+        'state',
+        'postal_code',
+        'phone_number',
+        'email_address',
     ];
 
     public function contacts()
     {
         return $this->hasMany(Contact::class);
     }
-
 }
