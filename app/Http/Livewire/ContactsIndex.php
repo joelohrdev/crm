@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Client;
 use App\Models\Contact;
 use Filament\Forms;
 use Filament\Notifications\Notification;

@@ -61,34 +61,7 @@
         <x-jet-dialog-modal wire:model.defer="showModal">
             <x-slot name="title">Create new client</x-slot>
             <x-slot name="content">
-                <div class="mb-5">
-                    <input wire:model.defer="name" type="text" class="w-full text-sm bg-gray-100 border-none rounded-lg placeholder-gray-900 px-4 py-2" placeholder="Company Name" required>
-                    @error('name')<span class="text-red-500">{{ $message }}</span>@enderror
-                </div>
-                <div class="mb-5">
-                    <select wire:model.defer="status" name="status" id="status" class="w-full bg-gray-100 text-sm rounded-lg border-none px-4 py-2">
-                        <option value="active">Active</option>
-                        <option value="closed">Closed</option>
-                    </select>
-                </div>
-                <div class="mb-5">
-                    <input wire:model.defer="address" type="text" class="w-full text-sm bg-gray-100 border-none rounded-lg placeholder-gray-900 px-4 py-2" placeholder="Address" >
-                </div>
-                <div class="mb-5">
-                    <input wire:model.defer="city" type="text" class="w-full text-sm bg-gray-100 border-none rounded-lg placeholder-gray-900 px-4 py-2" placeholder="City">
-                </div>
-                <div class="mb-5">
-                    <input wire:model.defer="state" type="text" class="w-full text-sm bg-gray-100 border-none rounded-lg placeholder-gray-900 px-4 py-2" placeholder="State">
-                </div>
-                <div class="mb-5">
-                    <input wire:model.defer="postal_code" type="text" class="w-full text-sm bg-gray-100 border-none rounded-lg placeholder-gray-900 px-4 py-2" placeholder="Zip Code" >
-                </div>
-                <div class="mb-5">
-                    <input wire:model.defer="phone_number" type="text" class="w-full text-sm bg-gray-100 border-none rounded-lg placeholder-gray-900 px-4 py-2" placeholder="Phone Number" >
-                </div>
-                <div class="mb-5">
-                    <input wire:model.defer="email_address" type="text" class="w-full text-sm bg-gray-100 border-none rounded-lg placeholder-gray-900 px-4 py-2" placeholder="Email Address" >
-                </div>
+                {{ $this->form }}
             </x-slot>
             <x-slot name="footer">
                 <button type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition" wire:click="$set('showModal', false)">
