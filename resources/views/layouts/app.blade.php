@@ -8,13 +8,14 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Styles -->
     @livewireStyles
+    <style>[x-cloak] { display: none !important; }</style>
 </head>
 <body class="font-sans antialiased h-full">
 <div class="min-h-full">
@@ -30,5 +31,6 @@
     </div>
 </div>
 @livewireScripts
+@livewire('notifications')
 </body>
 </html>

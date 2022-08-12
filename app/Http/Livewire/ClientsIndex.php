@@ -57,6 +57,11 @@ class ClientsIndex extends Component implements Forms\Contracts\HasForms
                 ->reactive()
                 ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
             Forms\Components\Hidden::make('slug'),
+            Forms\Components\Select::make('status')
+                ->options([
+                   'active' => 'Active',
+                   'closed' => 'Closed',
+                ]),
             Forms\Components\TextInput::make('address'),
             Forms\Components\Grid::make(3)
                 ->schema([
@@ -64,7 +69,9 @@ class ClientsIndex extends Component implements Forms\Contracts\HasForms
                     Forms\Components\TextInput::make('state'),
                     Forms\Components\TextInput::make('postal_code'),
                 ]),
-            Forms\Components\TextInput::make('phone_number'),
+            Forms\Components\TextInput::make('phone_number')
+                ->helperText('Ex: 123-123-1233')
+                ->tel(),
             Forms\Components\TextInput::make('email_address'),
         ];
     }
@@ -109,7 +116,7 @@ class ClientsIndex extends Component implements Forms\Contracts\HasForms
     public function render()
     {
         return view('livewire.clients-index', [
-            'clients' => Client::where('status', 'active')->orderBy('name', 'asc')->paginate(10),
+            'clients' => Client::orderBy('name', 'asc')->paginate(10),
         ]);
     }
 }

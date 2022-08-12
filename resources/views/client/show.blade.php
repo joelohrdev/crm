@@ -2,16 +2,22 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-between">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Clients : <span class="text-tkd-blue-700">{{ $client->name }}</span>
-                </h2>
-                <livewire:client-delete
-                    :key="$client->id"
-                    :client="$client"
-                />
+                <div></div>
+                <div class="flex space-x-3">
+                    <livewire:client-edit
+                        :key="$client->id"
+                        :client="$client"
+                    />
+                    <livewire:client-delete
+                        :key="$client->id"
+                        :client="$client"
+                    />
+                </div>
             </div>
-            <div>
+            <div class="mt-6 grid grid-cols-1 gap-6 lg:grid-flow-col-dense lg:grid-cols-3">
                 <livewire:client-show :client="$client"/>
+                <div class="bg-white shadow overflow-hidden sm:rounded-lg space-y-6 lg:col-start-2 lg:col-span-2">
+                </div>
             </div>
         </div>
     </div>
