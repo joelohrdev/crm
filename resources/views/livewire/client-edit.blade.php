@@ -1,5 +1,5 @@
 <div>
-    <button wire:click="showModal" type="button" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-slate-700 bg-slate-300 hover:bg-slate-200 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500">Edit</button>
+    <a wire:click="showModal" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:cursor-pointer">Edit</a>
 
     <form wire:submit.prevent="updateClient" action="#" method="post">
         <x-jet-dialog-modal wire:model.defer="showModal">
