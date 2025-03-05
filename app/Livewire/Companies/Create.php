@@ -21,7 +21,7 @@ class Create extends Component
     public ?string $zip = null;
     public ?array $selectedEmployees = null;
 
-    public function createCompany(): null
+    public function createCompany()
     {
         $this->validate([
             'name' => ['required', 'string', 'max:255', 'unique:companies,name'],
@@ -58,7 +58,10 @@ class Create extends Component
     public function render(): View
     {
         return view('livewire.companies.create', [
-            'users' => User::query()->whereNot('name', auth()->user()->name)->orderBy('name')->get(),
+            'users' => User::query()
+                ->whereNot('id', auth()->id())
+                ->orderBy('name')
+                ->get(),
         ]);
     }
 }
