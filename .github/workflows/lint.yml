@@ -26,8 +26,15 @@ jobs:
                   php-version: '8.4'
 
             - name: Add Flux Credentials Loaded From ENV
-              run: composer config http-basic.composer.fluxui.dev "${FLUX_USERNAME}" "${FLUX_LICENSE_KEY}"
-
+              run: |
+                  echo "Configuring Flux credentials..."
+                  composer config http-basic.composer.fluxui.dev "${{ secrets.FLUX_USERNAME }}" "${{ secrets.FLUX_LICENSE_KEY }}"
+                  echo "Verifying credentials are set..."
+                  composer config --list | grep -q "http-basic.composer.fluxui.dev" || exit 1
+              # These secrets need to be added in your GitHub repository:
+              # Go to Settings > Secrets and variables > Actions
+              # Add FLUX_USERNAME and FLUX_LICENSE_KEY as repository secrets
+              # Make sure the secrets are properly set in the environment settings
             - name: Install Dependencies
               run: |
                   composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
