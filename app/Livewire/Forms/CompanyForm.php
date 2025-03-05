@@ -22,8 +22,8 @@ class CompanyForm extends Form
     #[Validate('nullable|string|max:255')]
     public $city = '';
 
-    #[Validate('nullable|string|max:255')]
-    public $state = '';
+    #[Validate('nullable')]
+    public $state;
 
     #[Validate('nullable|string|max:255')]
     public $zip = '';

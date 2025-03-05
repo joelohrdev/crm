@@ -17,6 +17,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('companies.index');
     Route::get('companies/create', \App\Livewire\Companies\Create::class)
         ->name('companies.create');
+    Route::get('companies/{company:uuid}', \App\Livewire\Companies\Show::class)
+        ->name('companies.show');
 });
 
 Route::middleware(['auth'])->group(function () {

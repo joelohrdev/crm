@@ -2,7 +2,6 @@
 Company:
     attributes:
         name: string
-        industry: string
         website: string
         phone: string
         address: string
