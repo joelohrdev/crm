@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Companies;
 
+use App\Livewire\Companies\Traits\Searchable;
 use App\Models\Company;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\View\View;
@@ -12,13 +13,13 @@ use Livewire\WithPagination;
 
 class Index extends Component
 {
-    use WithPagination;
+    use Searchable, WithPagination;
 
     #[Session]
     public int $perPage = 10;
 
     public $sortBy = 'name';
-    public $sortDirection = 'desc';
+    public $sortDirection = 'asc';
 
     public function sort($column): void
     {
@@ -33,10 +34,12 @@ class Index extends Component
     #[Computed]
     public function companies(): LengthAwarePaginator
     {
-        return Company::query()
+        $query = Company::with('users');
+
+        $query = $this->applySearch($query);
+
+        return $query
             ->tap(fn ($query) => $this->sortBy ? $query->orderBy($this->sortBy, $this->sortDirection) : $query)
-            ->orderBy('name')
-            ->with('users')
             ->paginate($this->perPage);
     }
 

@@ -7,7 +7,15 @@
     </div>
     <flux:separator variant="subtle" class="my-4" />
 
-    <div class="mb-5 flex justify-end">
+    <div class="mb-5 flex items-center justify-between">
+        <flux:input
+            type="search"
+            wire:model.live.debounce.500ms="search"
+            size="sm"
+            placeholder="Search..."
+            icon="magnifying-glass"
+            class="max-w-80"
+        />
         <flux:select wire:model.live="perPage" size="sm" class="!w-auto">
             <flux:select.option value="10">10 per page</flux:select.option>
             <flux:select.option value="25">25 per page</flux:select.option>
