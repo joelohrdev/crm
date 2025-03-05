@@ -2,29 +2,31 @@
 
 namespace App\Livewire\Forms;
 
+use App\Enums\State;
+use Illuminate\Validation\Rules\Enum;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class CompanyForm extends Form
 {
     #[Validate('required|string|max:255|unique:companies,name')]
-    public $name = '';
+    public string $name = '';
 
     #[Validate('nullable|url')]
-    public $website = '';
+    public string $website = '';
 
     #[Validate('nullable|string|max:255')]
-    public $phone = '';
+    public string $phone = '';
 
     #[Validate('nullable|string|max:255')]
-    public $address = '';
+    public string $address = '';
 
     #[Validate('nullable|string|max:255')]
-    public $city = '';
+    public string $city = '';
 
-    #[Validate('nullable')]
-    public $state;
+    #[Validate('nullable', [new Enum(State::class)])]
+    public ?State $state = null;
 
     #[Validate('nullable|string|max:255')]
-    public $zip = '';
+    public string $zip = '';
 }
