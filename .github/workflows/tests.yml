@@ -26,6 +26,28 @@ jobs:
                   tools: composer:v2
                   coverage: xdebug
 
+            - name: Add Flux Credentials Loaded From ENV
+              run: |
+                  echo "Configuring Flux credentials..."
+                  # Create auth.json file directly
+                  composer config --auth http-basic.composer.fluxui.dev "${{ secrets.FLUX_USERNAME }}" "${{ secrets.FLUX_LICENSE_KEY }}"
+                  # Set environment variables for composer as backup
+                  echo "COMPOSER_AUTH={\"http-basic\":{\"composer.fluxui.dev\":{\"username\":\"${{ secrets.FLUX_USERNAME }}\",\"password\":\"${{ secrets.FLUX_LICENSE_KEY }}\"}}}" >> $GITHUB_ENV
+                  # Verify credentials file exists
+                  cat ~/.composer/auth.json
+                  echo "Credentials configured."
+
+                  # Additional fallback - create auth.json directly in project root
+                  echo '{
+                    "http-basic": {
+                      "composer.fluxui.dev": {
+                        "username": "${{ secrets.FLUX_USERNAME }}",
+                        "password": "${{ secrets.FLUX_LICENSE_KEY }}"
+                      }
+                    }
+                  }' > auth.json
+                  echo "Created auth.json in project root as fallback."
+
             - name: Setup Node
               uses: actions/setup-node@v4
               with:
@@ -36,7 +58,12 @@ jobs:
               run: npm i
 
             - name: Install Dependencies
-              run: composer install --no-interaction --prefer-dist --optimize-autoloader
+              run: |
+                  # Debug - check auth is configured
+                  echo "COMPOSER_AUTH environment variable is set: $( [[ ! -z "${COMPOSER_AUTH}" ]] && echo "YES" || echo "NO" )"
+                  echo "Auth file exists: $( [[ -f ~/.composer/auth.json ]] && echo "YES" || echo "NO" )"
+                  # Run composer install with verbose output for debugging
+                  composer install --no-interaction --prefer-dist --optimize-autoloader -v
 
             - name: Copy Environment File
               run: cp .env.example .env
