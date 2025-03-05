@@ -29,7 +29,7 @@ class Create extends Component
             'phone' => ['nullable', 'string', 'max:255'],
             'address' => ['nullable', 'string', 'max:255'],
             'city' => ['nullable', 'string', 'max:255'],
-            'state' => ['nullable', 'string', new Enum(State::class)],
+            'state' => ['nullable', new Enum(State::class)],
             'zip' => ['nullable', 'string', 'max:255'],
             'selectedEmployees' => ['nullable', 'array'],
         ]);

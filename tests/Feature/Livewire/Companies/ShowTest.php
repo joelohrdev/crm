@@ -31,7 +31,7 @@ test('company information can be updated', function () {
     $company = Company::factory()->create();
 
     $response = Livewire::test(Show::class, ['company' => $company])
-        ->set('form.name', 'New Company Name')
+        ->set('name', 'New Company Name')
         ->call('updateCompany');
 
     $response->assertHasNoErrors();

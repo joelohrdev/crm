@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\State;
 use App\Livewire\Companies\Create;
 use App\Models\Company;
 use App\Models\User;
@@ -22,12 +23,12 @@ test('new company can be created', function () {
     $this->actingAs($user = User::factory()->create());
 
     $response = Livewire::test(Create::class)
-        ->set('form.name', 'Test Company')
-        ->set('form.website', 'https://testcompany.com')
-        ->set('form.address', '123 Fake St.')
-        ->set('form.city', 'Springfield')
-        ->set('form.state', 'IL')
-        ->set('form.zip', '62701')
+        ->set('name', 'Test Company')
+        ->set('website', 'https://testcompany.com')
+        ->set('address', '123 Fake St.')
+        ->set('city', 'Springfield')
+        ->set('state', State::ALABAMA)
+        ->set('zip', '62701')
         ->call('createCompany');
 
     // TODO: Add random users to the company
@@ -43,11 +44,11 @@ test('new company can not be created without name', function () {
     $this->actingAs($user = User::factory()->create());
 
     $response = Livewire::test(Create::class)
-        ->set('form.website', 'https://testcompany.com')
-        ->set('form.address', '123 Fake St.')
-        ->set('form.city', 'Springfield')
-        ->set('form.state', 'IL')
-        ->set('form.zip', '62701')
+        ->set('website', 'https://testcompany.com')
+        ->set('address', '123 Fake St.')
+        ->set('city', 'Springfield')
+        ->set('state', 'IL')
+        ->set('zip', '62701')
         ->call('createCompany');
 
     $response->assertHasErrors();
