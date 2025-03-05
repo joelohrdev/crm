@@ -15,9 +15,9 @@ class Show extends Component
     public CompanyForm $form;
     public $name;
 
-    public function mount(): void
+    public function mount(Company $company): void
     {
-        $this->form->setCompany($this->company);
+        $this->form->setCompany($company);
     }
 
     public function updateCompany(): void
