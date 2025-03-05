@@ -26,19 +26,6 @@ jobs:
                   tools: composer:v2
                   coverage: xdebug
 
-            # Create auth.json file with credentials
-            - name: Create auth.json
-              run: |
-                  cat > auth.json << 'EOL'
-                  {
-                      "http-basic": {
-                          "composer.fluxui.dev": {
-                              "username": "TOKEN",
-                              "password": "${{ secrets.FLUX_PRO_TOKEN }}"
-                          }
-                      }
-                  }
-
             - name: Setup Node
               uses: actions/setup-node@v4
               with:

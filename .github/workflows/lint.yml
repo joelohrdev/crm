@@ -25,19 +25,6 @@ jobs:
               with:
                   php-version: '8.4'
 
-            # Create auth.json file with credentials
-            - name: Create auth.json
-              run: |
-                  cat > auth.json << 'EOL'
-                  {
-                      "http-basic": {
-                          "composer.fluxui.dev": {
-                              "username": "TOKEN",
-                              "password": "${{ secrets.FLUX_PRO_TOKEN }}"
-                          }
-                      }
-                  }
-
             - name: Add Flux Credentials Loaded From ENV
               run: composer config http-basic.composer.fluxui.dev "${{ secrets.FLUX_USERNAME }}" "${{ secrets.FLUX_LICENSE_KEY }}"
 
