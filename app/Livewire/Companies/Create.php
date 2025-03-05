@@ -2,32 +2,49 @@
 
 namespace App\Livewire\Companies;
 
-use App\Livewire\Forms\CompanyForm;
+use App\Enums\State;
 use App\Models\Company;
 use App\Models\User;
 use Flux\Flux;
+use Illuminate\Validation\Rules\Enum;
 use Illuminate\View\View;
 use Livewire\Component;
 
 class Create extends Component
 {
-    public CompanyForm $form;
+    public string $name = '';
+    public ?string $website = null;
+    public ?string $phone = null;
+    public ?string $address = null;
+    public ?string $city = null;
+    public ?State $state = null;
+    public ?string $zip = null;
+    public ?array $selectedEmployees = null;
 
     public function createCompany(): null
     {
-        $this->validate();
-
-        $company = Company::create([
-            'name' => $this->form->name,
-            'website' => $this->form->website,
-            'phone' => $this->form->phone,
-            'address' => $this->form->address,
-            'city' => $this->form->city,
-            'state' => $this->form->state,
-            'zip' => $this->form->zip,
+        $this->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:companies,name'],
+            'website' => ['nullable', 'url'],
+            'phone' => ['nullable', 'string', 'max:255'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'city' => ['nullable', 'string', 'max:255'],
+            'state' => ['nullable', 'string', new Enum(State::class)],
+            'zip' => ['nullable', 'string', 'max:255'],
+            'selectedEmployees' => ['nullable', 'array'],
         ]);
 
-        $company->users()->attach($this->form->selectedEmployees);
+        $company = Company::create([
+            'name' => $this->name,
+            'website' => $this->website,
+            'phone' => $this->phone,
+            'address' => $this->address,
+            'city' => $this->city,
+            'state' => $this->state,
+            'zip' => $this->zip,
+        ]);
+
+        $company->users()->attach($this->selectedEmployees);
 
         Flux::toast(
             text: 'The company has been created successfully.',
