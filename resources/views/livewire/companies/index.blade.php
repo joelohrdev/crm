@@ -18,7 +18,14 @@
 
     <flux:table :paginate="$this->companies">
         <flux:table.columns>
-            <flux:table.column>Name</flux:table.column>
+            <flux:table.column
+                sortable
+                :sorted="$sortBy === 'name'"
+                :direction="$sortDirection"
+                wire:click="sort('name')"
+            >
+                Name
+            </flux:table.column>
             <flux:table.column>Employees</flux:table.column>
             <flux:table.column></flux:table.column>
         </flux:table.columns>

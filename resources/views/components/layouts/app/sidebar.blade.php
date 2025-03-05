@@ -28,7 +28,7 @@
                     <flux:navlist.item
                         icon="building-storefront"
                         :href="route('companies.index')"
-                        :current="request()->routeIs('companies.index')"
+                        :current="request()->routeIs('companies.*')"
                         wire:navigate
                     >
                         {{ __('Companies') }}

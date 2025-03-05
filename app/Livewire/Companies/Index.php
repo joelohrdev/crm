@@ -17,10 +17,27 @@ class Index extends Component
     #[Session]
     public int $perPage = 10;
 
+    public $sortBy = 'name';
+    public $sortDirection = 'desc';
+
+    public function sort($column): void
+    {
+        if ($this->sortBy === $column) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortBy = $column;
+            $this->sortDirection = 'asc';
+        }
+    }
+
     #[Computed]
     public function companies(): LengthAwarePaginator
     {
-        return Company::orderBy('name')->with('users')->paginate($this->perPage);
+        return Company::query()
+            ->tap(fn ($query) => $this->sortBy ? $query->orderBy($this->sortBy, $this->sortDirection) : $query)
+            ->orderBy('name')
+            ->with('users')
+            ->paginate($this->perPage);
     }
 
     public function render(): View

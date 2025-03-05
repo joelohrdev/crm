@@ -15,9 +15,9 @@ class CompanyFactory extends Factory
     {
         return [
             'uuid' => $this->faker->uuid(),
-            'name' => $this->faker->name(),
-            'website' => $this->faker->word(),
-            'phone' => $this->faker->phoneNumber(),
+            'name' => $this->faker->company(),
+            'website' => $this->faker->url(),
+            'phone' => $this->faker->numerify('###-###-####'),
             'address' => $this->faker->address(),
             'city' => $this->faker->city(),
             'state' => $this->faker->randomElement(State::cases())->value,
