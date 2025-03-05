@@ -25,16 +25,16 @@
     --color-zinc-900: #171717;
     --color-zinc-950: #0a0a0a;
 
-    --color-accent: var(--color-lime-400);
-    --color-accent-content: var(--color-lime-600);
-    --color-accent-foreground: var(--color-lime-900);
+    --color-accent: var(--color-emerald-600);
+    --color-accent-content: var(--color-emerald-600);
+    --color-accent-foreground: var(--color-white);
 }
 
 @layer theme {
     .dark {
-        --color-accent: var(--color-lime-400);
-        --color-accent-content: var(--color-lime-400);
-        --color-accent-foreground: var(--color-lime-950);
+        --color-accent: var(--color-emerald-600);
+        --color-accent-content: var(--color-emerald-400);
+        --color-accent-foreground: var(--color-white);
     }
 }
 
