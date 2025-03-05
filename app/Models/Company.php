@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\State;
 use App\Observers\CompanyObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,12 +19,11 @@ class Company extends Model
         return [
             'uuid' => 'string',
             'name' => 'string',
-            'industry' => 'string',
             'website' => 'string',
             'phone' => 'string',
             'address' => 'string',
             'city' => 'string',
-            'state' => 'string',
+            'state' => State::class,
             'zip' => 'string',
         ];
     }

@@ -15,7 +15,6 @@ class CompanyFactory extends Factory
         return [
             'uuid' => $this->faker->uuid(),
             'name' => $this->faker->name(),
-            'industry' => $this->faker->word(),
             'website' => $this->faker->word(),
             'phone' => $this->faker->phoneNumber(),
             'address' => $this->faker->address(),
