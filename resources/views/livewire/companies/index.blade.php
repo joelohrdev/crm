@@ -20,8 +20,7 @@
         <flux:table.columns>
             <flux:table.column>Name</flux:table.column>
             <flux:table.column>Employees</flux:table.column>
-            <flux:table.column>Status</flux:table.column>
-            <flux:table.column>Amount</flux:table.column>
+            <flux:table.column></flux:table.column>
         </flux:table.columns>
 
         <flux:table.rows>
@@ -32,19 +31,22 @@
                         <div class="flex items-center -space-x-2">
                             @foreach ($company->users as $user)
                                 <flux:tooltip :content="$user->name">
-                                    <span
-                                        class="inline-flex size-8 items-center justify-center rounded-full border border-gray-200 bg-white text-xs font-semibold text-gray-800 shadow-2xs dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                    >
-                                        {{ $user->initials() }}
-                                    </span>
+                                    <x-avatar>{{ $user->initials() }}</x-avatar>
                                 </flux:tooltip>
                             @endforeach
                         </div>
                     </flux:table.cell>
-                    <flux:table.cell>
-                        <flux:badge color="green" size="sm" inset="top bottom">Paid</flux:badge>
+                    <flux:table.cell class="flex justify-end">
+                        <flux:button
+                            wire:navigate.hover
+                            href="{{ route('companies.show', $company) }}"
+                            size="sm"
+                            variant="ghost"
+                            inset="top bottom"
+                        >
+                            View
+                        </flux:button>
                     </flux:table.cell>
-                    <flux:table.cell variant="strong">$49.00</flux:table.cell>
                 </flux:table.row>
             @endforeach
         </flux:table.rows>
