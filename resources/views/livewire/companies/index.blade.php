@@ -19,7 +19,7 @@
     <flux:table :paginate="$this->companies">
         <flux:table.columns>
             <flux:table.column>Name</flux:table.column>
-            <flux:table.column>Date</flux:table.column>
+            <flux:table.column>Employees</flux:table.column>
             <flux:table.column>Status</flux:table.column>
             <flux:table.column>Amount</flux:table.column>
         </flux:table.columns>
@@ -28,7 +28,19 @@
             @foreach ($this->companies() as $company)
                 <flux:table.row>
                     <flux:table.cell>{{ $company->name }}</flux:table.cell>
-                    <flux:table.cell>Jul 29, 10:45 AM</flux:table.cell>
+                    <flux:table.cell>
+                        <div class="flex items-center -space-x-2">
+                            @foreach ($company->users as $user)
+                                <flux:tooltip :content="$user->name">
+                                    <span
+                                        class="inline-flex size-8 items-center justify-center rounded-full border border-gray-200 bg-white text-xs font-semibold text-gray-800 shadow-2xs dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                                    >
+                                        {{ $user->initials() }}
+                                    </span>
+                                </flux:tooltip>
+                            @endforeach
+                        </div>
+                    </flux:table.cell>
                     <flux:table.cell>
                         <flux:badge color="green" size="sm" inset="top bottom">Paid</flux:badge>
                     </flux:table.cell>

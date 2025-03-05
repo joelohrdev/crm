@@ -30,6 +30,8 @@ test('new company can be created', function () {
         ->set('form.zip', '62701')
         ->call('createCompany');
 
+    // TODO: Add random users to the company
+
     $response->assertHasNoErrors();
 
     $company = Company::where('name', 'Test Company')->first();

@@ -20,7 +20,7 @@ class Index extends Component
     #[Computed]
     public function companies(): LengthAwarePaginator
     {
-        return Company::orderBy('name')->paginate($this->perPage);
+        return Company::orderBy('name')->with('users')->paginate($this->perPage);
     }
 
     public function render(): View
