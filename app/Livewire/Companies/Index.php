@@ -34,7 +34,7 @@ class Index extends Component
     #[Computed]
     public function companies(): LengthAwarePaginator
     {
-        $query = Company::with('users');
+        $query = $this->baseQuery()->with('users');
 
         $query = $this->applySearch($query);
 
@@ -46,5 +46,10 @@ class Index extends Component
     public function render(): View
     {
         return view('livewire.companies.index');
+    }
+
+    private function baseQuery()
+    {
+        return auth()->user()->isAdmin() ? Company::query() : auth()->user()->companies();
     }
 }

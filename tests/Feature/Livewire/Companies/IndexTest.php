@@ -26,3 +26,20 @@ test('it can see companies', function () {
 
     $response->assertSee($companies->first()->name);
 });
+
+test('it can not see all companies if not admin', function () {
+    $admin = User::factory()->create(['is_admin' => true]);
+    $user = User::factory()->create(['is_admin' => false]);
+
+    $adminCompany = Company::factory()->create();
+    $userCompany = Company::factory()->create();
+
+    $admin->companies()->attach($adminCompany);
+    $user->companies()->attach($userCompany);
+
+    $this->actingAs($user);
+
+    $response = $this->get('/companies')
+        ->assertDontSee($adminCompany->name)
+        ->assertSee($userCompany->name);
+});
