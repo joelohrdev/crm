@@ -11,4 +11,9 @@ class CompanyObserver
     {
         $company->uuid = (string) Str::uuid();
     }
+
+    public function created(Company $company): void
+    {
+        $company->users()->attach(auth()->id());
+    }
 }

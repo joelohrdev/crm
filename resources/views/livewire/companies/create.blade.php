@@ -65,6 +65,15 @@
                 <flux:error name="form.phone" />
             </flux:field>
 
+            <flux:field>
+                <flux:label>Assign Employees</flux:label>
+                <flux:select variant="listbox" multiple wire:model="form.selectedEmployees">
+                    @foreach ($users as $user)
+                        <flux:select.option :value="$user->id">{{ $user->name }}</flux:select.option>
+                    @endforeach
+                </flux:select>
+            </flux:field>
+
             <flux:button type="submit" variant="primary">Submit</flux:button>
             <flux:button wire:navigate href="{{ route('companies.index') }}">Cancel</flux:button>
         </form>

@@ -29,4 +29,7 @@ class CompanyForm extends Form
 
     #[Validate('nullable|string|max:255')]
     public string $zip = '';
+
+    #[Validate('nullable|array')]
+    public array $selectedEmployees = [];
 }
