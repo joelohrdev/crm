@@ -1,9 +1,26 @@
 <?php
 
-use App\Livewire\Companies\Index;
-use Livewire\Livewire;
+use App\Models\Company;
+use App\Models\User;
 
-it('renders successfully', function () {
-    Livewire::test(Index::class)
-        ->assertStatus(200);
+uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+
+test('guests are redirected to the login page', function () {
+    $this->get('/companies')->assertRedirect('/login');
+});
+
+test('company index page is displayed', function () {
+    $this->actingAs($user = User::factory()->create());
+
+    $this->get('/companies')->assertOk();
+});
+
+test('it can see companies', function () {
+    $this->actingAs($user = User::factory()->create());
+
+    $companies = Company::factory()->count(5)->create();
+
+    $response = $this->get('/companies');
+
+    $response->assertSee($companies->first()->name);
 });
