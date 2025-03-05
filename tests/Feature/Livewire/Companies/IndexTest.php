@@ -12,7 +12,9 @@ test('guests are redirected to the login page', function () {
 test('company index page is displayed', function () {
     $this->actingAs($user = User::factory()->create());
 
-    $this->get('/companies')->assertOk();
+    $this->get('/companies')
+        ->assertSee('Add Company')
+        ->assertOk();
 });
 
 test('it can see companies', function () {

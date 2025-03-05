@@ -1,7 +1,9 @@
 <div>
     <div class="flex items-center justify-between">
         <flux:heading size="xl">Companies</flux:heading>
-        <flux:button variant="primary" size="sm">Add Company</flux:button>
+        <flux:button wire:navigate href="{{ route('companies.create') }}" variant="primary" size="sm">
+            Add Company
+        </flux:button>
     </div>
     <flux:separator variant="subtle" class="my-4" />
 
