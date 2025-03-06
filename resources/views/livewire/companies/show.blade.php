@@ -4,11 +4,26 @@
             <flux:heading size="xl">
                 <div class="flex items-center gap-x-3">
                     {{ $company->name }}
-                    <flux:button variant="ghost" size="sm" icon="star"></flux:button>
+                    <flux:button variant="ghost" size="sm">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="size-4"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                            />
+                        </svg>
+                    </flux:button>
                 </div>
             </flux:heading>
             <flux:subheading size="sm">
-                <flux:badge variant="pill" size="sm" class="mr-3">Active</flux:badge>
+                <flux:badge color="lime" variant="pill" size="sm" class="mr-3">Active</flux:badge>
                 {{ $company->website }}
             </flux:subheading>
         </div>
@@ -16,7 +31,6 @@
             wire:navigate
             href="{{ route('companies.index') }}"
             variant="primary"
-            size="sm"
             class="group relative overflow-hidden transition-all duration-300 hover:pl-6"
         >
             <span
@@ -52,8 +66,8 @@
                 <flux:tab>Activity</flux:tab>
                 <flux:tab>Tasks</flux:tab>
             </flux:tabs>
-            <div class="rounded-lg border p-6">
-                <flux:heading size="lg">Overview</flux:heading>
+            <flux:card>
+                <flux:heading size="lg" class="mb-6">Company Overview</flux:heading>
                 <form wire:submit.prevent="updateCompany" class="space-y-6">
                     <flux:field>
                         <flux:label badge="Required">Company Name</flux:label>
@@ -125,12 +139,18 @@
 
                     <flux:button type="submit" variant="primary">Update</flux:button>
                 </form>
-            </div>
+            </flux:card>
         </div>
         <div class="space-y-6">
-            <div class="rounded-lg border p-6">right</div>
-            <div class="rounded-lg border p-6">right</div>
-            <div class="rounded-lg border p-6">right</div>
+            <flux:card>
+                <flux:heading size="lg" class="mb-6">Company Details</flux:heading>
+            </flux:card>
+            <flux:card>
+                <flux:heading size="lg" class="mb-6">Quick Actions</flux:heading>
+            </flux:card>
+            <flux:card>
+                <flux:heading size="lg" class="mb-6">Upcoming Tasks</flux:heading>
+            </flux:card>
         </div>
     </div>
 </div>
