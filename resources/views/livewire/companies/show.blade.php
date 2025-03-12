@@ -2,16 +2,16 @@
     <div class="flex items-center justify-between">
         <div>
             <flux:heading size="xl">
-                <div class="flex items-center gap-x-3">
+                <div class="flex items-center">
                     {{ $company->name }}
-                    <flux:button variant="ghost" size="sm">
+                    <flux:button wire:click="toggleFavorite" variant="ghost" size="sm">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke-width="1.5"
                             stroke="currentColor"
-                            class="size-4"
+                            class="{{ $company->favorite ? 'fill-yellow-500 text-yellow-500' : 'text-gray-500' }} size-4 transition-all duration-300 hover:scale-110 active:scale-90"
                         >
                             <path
                                 stroke-linecap="round"
@@ -23,7 +23,9 @@
                 </div>
             </flux:heading>
             <flux:subheading size="sm">
-                <flux:badge color="lime" variant="pill" size="sm" class="mr-3">Active</flux:badge>
+                <flux:badge color="{{ $company->status->color() }}" variant="pill" size="sm" class="mr-3">
+                    {{ $company->status->label() }}
+                </flux:badge>
                 {{ $company->website }}
             </flux:subheading>
         </div>

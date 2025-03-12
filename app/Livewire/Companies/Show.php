@@ -21,6 +21,8 @@ class Show extends Component
     public $city;
     public $state;
     public $zip;
+    public $status;
+    public $favorite;
     public $selectedEmployees = [];
 
     public function mount(): void
@@ -33,6 +35,13 @@ class Show extends Component
         $this->state = $this->company->state;
         $this->zip = $this->company->zip;
         $this->selectedEmployees = $this->company->users->pluck('id')->toArray();
+    }
+
+    public function toggleFavorite(): void
+    {
+        $this->company->update([
+            'favorite' => ! $this->company->favorite,
+        ]);
     }
 
     public function updateCompany(): void

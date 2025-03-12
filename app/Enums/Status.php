@@ -16,4 +16,13 @@ enum Status: string
             self::PENDING => 'Pending',
         };
     }
+
+    public function color(): string
+    {
+        return match ($this) {
+            self::ACTIVE => 'lime',
+            self::INACTIVE => 'red',
+            self::PENDING => 'yellow',
+        };
+    }
 }
