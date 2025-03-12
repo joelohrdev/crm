@@ -3,6 +3,7 @@
 namespace App\Livewire\Companies;
 
 use App\Enums\State;
+use App\Enums\Status;
 use App\Models\Company;
 use App\Models\User;
 use Flux\Flux;
@@ -19,6 +20,8 @@ class Create extends Component
     public ?string $city = null;
     public ?State $state = null;
     public ?string $zip = null;
+    public bool $favorite = false;
+    public ?Status $status = null;
     public ?array $selectedEmployees = null;
 
     public function createCompany()
@@ -31,6 +34,8 @@ class Create extends Component
             'city' => ['nullable', 'string', 'max:255'],
             'state' => ['nullable', new Enum(State::class)],
             'zip' => ['nullable', 'string', 'max:255'],
+            'favorite' => ['boolean'],
+            'status' => ['nullable', new Enum(Status::class)],
             'selectedEmployees' => ['nullable', 'array'],
         ]);
 
@@ -42,6 +47,8 @@ class Create extends Component
             'city' => $this->city,
             'state' => $this->state,
             'zip' => $this->zip,
+            'favorite' => $this->favorite,
+            'status' => $this->status,
         ]);
 
         $company->users()->attach($this->selectedEmployees);

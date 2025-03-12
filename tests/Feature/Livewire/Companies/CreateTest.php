@@ -1,11 +1,13 @@
 <?php
 
 use App\Enums\State;
+use App\Enums\Status;
 use App\Livewire\Companies\Create;
 use App\Models\Company;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(RefreshDatabase::class);
 
 test('guests are redirected to the login page', function () {
     $this->get('/companies/create')->assertRedirect('/login');
@@ -29,6 +31,8 @@ test('new company can be created', function () {
         ->set('city', 'Springfield')
         ->set('state', State::ALABAMA)
         ->set('zip', '62701')
+        ->set('favorite', true)
+        ->set('status', Status::ACTIVE)
         ->call('createCompany');
 
     // TODO: Add random users to the company

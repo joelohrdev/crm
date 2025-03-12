@@ -65,6 +65,14 @@
                 <flux:error name="phone" />
             </flux:field>
 
+            <flux:radio.group wire:model="status" label="Status" variant="segmented">
+                @foreach (\App\Enums\Status::cases() as $status)
+                    <flux:radio value="{{ $status->value }}" :label="$status" />
+                @endforeach
+            </flux:radio.group>
+
+            <flux:checkbox wire:model="favorite" label="Mark as Favorite" />
+
             <flux:field>
                 <flux:label>Assign Employees</flux:label>
                 <flux:select variant="listbox" multiple wire:model="selectedEmployees">
