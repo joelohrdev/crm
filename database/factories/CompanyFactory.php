@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\State;
+use App\Enums\Status;
 use App\Models\Company;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -22,6 +23,8 @@ class CompanyFactory extends Factory
             'city' => $this->faker->city(),
             'state' => $this->faker->randomElement(State::cases())->value,
             'zip' => $this->faker->postcode(),
+            'favorite' => $this->faker->boolean(),
+            'status' => $this->faker->randomElement(Status::cases())->value,
             'created_at' => CarbonImmutable::now(),
             'updated_at' => CarbonImmutable::now(),
         ];

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\State;
+use App\Enums\Status;
 use App\Observers\CompanyObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,6 +32,8 @@ class Company extends Model
             'city' => 'string',
             'state' => State::class,
             'zip' => 'string',
+            'favorite' => 'boolean',
+            'status' => Status::class,
         ];
     }
 }

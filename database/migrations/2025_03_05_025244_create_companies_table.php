@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('zip')->nullable();
+            $table->boolean('favorite')->default(false);
+            $table->string('status');
             $table->timestamps();
             $table->softDeletes();
         });
