@@ -141,10 +141,7 @@
         <div class="space-y-6">
             <livewire:companies.components.details :$company />
             <livewire:companies.components.actions :$company />
-            <flux:card>
-                <flux:heading size="lg" class="mb-6">Upcoming Tasks</flux:heading>
-                <flux:button class="w-full">Schedule Task</flux:button>
-            </flux:card>
+            <livewire:companies.components.tasks :$company />
         </div>
     </div>
 </div>
