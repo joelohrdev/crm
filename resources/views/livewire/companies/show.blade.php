@@ -140,15 +140,7 @@
         </div>
         <div class="space-y-6">
             <livewire:companies.components.details :$company />
-            <flux:card>
-                <flux:heading size="lg" class="mb-6">Quick Actions</flux:heading>
-                <div class="space-y-3">
-                    <flux:button icon="envelope" class="w-full">Send Email</flux:button>
-                    <flux:button icon="phone" class="w-full">Call Company</flux:button>
-                    <flux:button icon="document" class="w-full">Create Document</flux:button>
-                    <flux:button icon="user" class="w-full">Add Contact</flux:button>
-                </div>
-            </flux:card>
+            <livewire:companies.components.actions :$company />
             <flux:card>
                 <flux:heading size="lg" class="mb-6">Upcoming Tasks</flux:heading>
                 <flux:button class="w-full">Schedule Task</flux:button>
