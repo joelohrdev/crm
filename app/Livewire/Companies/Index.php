@@ -4,7 +4,6 @@ namespace App\Livewire\Companies;
 
 use App\Livewire\Companies\Traits\Searchable;
 use App\Models\Company;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Session;
@@ -32,9 +31,9 @@ class Index extends Component
     }
 
     #[Computed]
-    public function companies(): LengthAwarePaginator
+    public function companies()
     {
-        $query = $this->baseQuery()->with('users');
+        $query = $this->baseQuery()->with('users:name');
 
         $query = $this->applySearch($query);
 
@@ -45,7 +44,9 @@ class Index extends Component
 
     public function render(): View
     {
-        return view('livewire.companies.index');
+        return view('livewire.companies.index', [
+            'companies' => $this->companies(),
+        ]);
     }
 
     private function baseQuery()

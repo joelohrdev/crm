@@ -26,7 +26,7 @@
                 <flux:badge color="{{ $company->status->color() }}" variant="pill" size="sm" class="mr-3">
                     {{ $company->status->label() }}
                 </flux:badge>
-                {{ $company->website }}
+                <a class="hover:underline" href="{{ $company->website }}" target="_blank">{{ $company->website }}</a>
             </flux:subheading>
         </div>
         <flux:button
@@ -62,10 +62,10 @@
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div class="lg:col-span-2">
             <flux:tabs class="mb-6 w-full" variant="segmented">
-                <flux:tab>Overview</flux:tab>
-                <flux:tab>Contacts</flux:tab>
-                <flux:tab>Deals</flux:tab>
+                <flux:tab current href="{{ route('companies.show', $company) }}">Overview</flux:tab>
+                <flux:tab href="{{ route('companies.contacts.index', $company) }}">Contacts</flux:tab>
                 <flux:tab>Activity</flux:tab>
+                <flux:tab>Deals</flux:tab>
                 <flux:tab>Tasks</flux:tab>
             </flux:tabs>
             <flux:card>
@@ -145,13 +145,38 @@
         </div>
         <div class="space-y-6">
             <flux:card>
-                <flux:heading size="lg" class="mb-6">Company Details</flux:heading>
+                <flux:heading size="lg" class="mb-6">
+                    Company Details
+                    <div class="mt-3 space-y-3 text-sm text-gray-500">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-x-2">
+                                <flux:icon.calendar />
+                                Created
+                            </div>
+                            <span>{{ $company->created_at->format('F d, Y') }}</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-x-2">
+                                <flux:icon.clock />
+                                Last Updated
+                            </div>
+                            <span>{{ $company->updated_at->format('F d, Y') }}</span>
+                        </div>
+                    </div>
+                </flux:heading>
             </flux:card>
             <flux:card>
                 <flux:heading size="lg" class="mb-6">Quick Actions</flux:heading>
+                <div class="space-y-3">
+                    <flux:button icon="envelope" class="w-full">Send Email</flux:button>
+                    <flux:button icon="phone" class="w-full">Call Company</flux:button>
+                    <flux:button icon="document" class="w-full">Create Document</flux:button>
+                    <flux:button icon="user" class="w-full">Add Contact</flux:button>
+                </div>
             </flux:card>
             <flux:card>
                 <flux:heading size="lg" class="mb-6">Upcoming Tasks</flux:heading>
+                <flux:button class="w-full">Schedule Task</flux:button>
             </flux:card>
         </div>
     </div>

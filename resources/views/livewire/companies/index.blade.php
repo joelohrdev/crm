@@ -24,7 +24,7 @@
         </flux:select>
     </div>
 
-    <flux:table :paginate="$this->companies">
+    <flux:table :paginate="$companies">
         <flux:table.columns>
             <flux:table.column
                 sortable
@@ -35,12 +35,19 @@
                 Name
             </flux:table.column>
             <flux:table.column>Employees</flux:table.column>
-            <flux:table.column>Status</flux:table.column>
+            <flux:table.column
+                sortable
+                :sorted="$sortBy === 'status'"
+                :direction="$sortDirection"
+                wire:click="sort('status')"
+            >
+                Status
+            </flux:table.column>
             <flux:table.column></flux:table.column>
         </flux:table.columns>
 
         <flux:table.rows>
-            @foreach ($this->companies() as $company)
+            @foreach ($companies as $company)
                 <flux:table.row>
                     <flux:table.cell>
                         <div class="flex items-center">

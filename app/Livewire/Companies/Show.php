@@ -82,6 +82,6 @@ class Show extends Component
                 ->whereNot('id', auth()->id())
                 ->orderBy('name')
                 ->get(),
-        ]);
+        ])->title($this->company->name);
     }
 }
