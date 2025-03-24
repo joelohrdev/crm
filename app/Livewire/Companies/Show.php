@@ -75,13 +75,20 @@ class Show extends Component
         );
     }
 
+    public function getUsers()
+    {
+        return cache()->remember('assigned-users', now()->addMinutes(5), function () {
+            return User::query()
+                ->whereNot('id', auth()->id())
+                ->orderBy('name')
+                ->get();
+        });
+    }
+
     public function render(): View
     {
         return view('livewire.companies.show', [
-            'users' => User::query()
-                ->whereNot('id', auth()->id())
-                ->orderBy('name')
-                ->get(),
+            'users' => $this->getUsers(),
         ])->title($this->company->name);
     }
 }

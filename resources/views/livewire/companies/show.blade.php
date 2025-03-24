@@ -57,17 +57,12 @@
             Back
         </flux:button>
     </div>
+
     <flux:separator variant="subtle" class="my-4" />
 
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div class="lg:col-span-2">
-            <flux:tabs class="mb-6 w-full" variant="segmented">
-                <flux:tab current href="{{ route('companies.show', $company) }}">Overview</flux:tab>
-                <flux:tab href="{{ route('companies.contacts.index', $company) }}">Contacts</flux:tab>
-                <flux:tab>Activity</flux:tab>
-                <flux:tab>Deals</flux:tab>
-                <flux:tab>Tasks</flux:tab>
-            </flux:tabs>
+            <livewire:companies.sub-navigation :$company />
             <flux:card>
                 <flux:heading size="lg" class="mb-6">Company Overview</flux:heading>
                 <form wire:submit.prevent="updateCompany" class="space-y-6">
